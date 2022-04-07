@@ -1,9 +1,8 @@
-#%%
 import torch
 
-class Config(object):
 
-    def __init__(self,wandb=None):
+class Config(object):
+    def __init__(self, wandb=None):
         self.input_channels = 1
 
         self.src_path = "/scratch/SLEEP_data/"
@@ -11,10 +10,9 @@ class Config(object):
         self.wandb = wandb
         self.batch_size = 256
 
-
         self.degree = 0.05
         self.mask_max_points = 200
-        self.mask_min_points = 50 
+        self.mask_min_points = 50
 
         # time domain resnet parameters
         self.tc_hidden_dim = 128

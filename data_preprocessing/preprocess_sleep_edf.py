@@ -10,7 +10,7 @@ from datetime import datetime
 
 import numpy as np
 import pandas as pd
-from scipy.signal import butter,lfilter
+from scipy.signal import butter, lfilter
 from mne.io import concatenate_raws, read_raw_edf
 
 import dhedfreader
@@ -23,23 +23,9 @@ N3 = 3
 REM = 4
 UNKNOWN = 5
 
-stage_dict = {
-    "W": W,
-    "N1": N1,
-    "N2": N2,
-    "N3": N3,
-    "REM": REM,
-    "UNKNOWN": UNKNOWN
-}
+stage_dict = {"W": W, "N1": N1, "N2": N2, "N3": N3, "REM": REM, "UNKNOWN": UNKNOWN}
 
-class_dict = {
-    0: "W",
-    1: "N1",
-    2: "N2",
-    3: "N3",
-    4: "REM",
-    5: "UNKNOWN"
-}
+class_dict = {0: "W", 1: "N1", 2: "N2", 3: "N3", 4: "REM", 5: "UNKNOWN"}
 
 ann2label = {
     "Sleep stage W": 0,
@@ -49,14 +35,14 @@ ann2label = {
     "Sleep stage 4": 3,
     "Sleep stage R": 4,
     "Sleep stage ?": 5,
-    "Movement time": 5
+    "Movement time": 5,
 }
 
 EPOCH_SEC_SIZE = 30
 
 
 def combine_to_subjects(root_dir, output_dir):
-    sampling_rate = 100.
+    sampling_rate = 100.0
     files = os.listdir(root_dir)
     files = [os.path.join(root_dir, i) for i in files]
 
@@ -88,33 +74,30 @@ def combine_to_subjects(root_dir, output_dir):
         # Saving as numpy files
         # print(file, x_values.shape[0], y_values.shape[0])
         filename = "subject_" + str(i) + ".npz"
-       
-        save_dict = {
-            "x": new_x,
-            "y": y1,
-            "fs": sampling_rate
-        }
+
+        save_dict = {"x": new_x, "y": y1, "fs": sampling_rate}
         np.savez(os.path.join(output_dir, filename), **save_dict)
         print(" ---------- Combining files to subjects is done ---------")
-
 
 
 def main():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--dir", type=str, default="/scratch/SLEEP_data",
-                        help="File path to the PSG and annotation files.")
+    parser.add_argument(
+        "--dir",
+        type=str,
+        default="/scratch/SLEEP_data",
+        help="File path to the PSG and annotation files.",
+    )
 
-    parser.add_argument("--channels", type= int, default=2,
-                        help="The selected channel")
+    parser.add_argument("--channels", type=int, default=2, help="The selected channel")
 
     args = parser.parse_args()
 
     args.dir = "/scratch/SLEEP_data"
     args.channels = 2
 
-
-    #data_dir = os.path.join(args.dir, "/sleep-edf-database-expanded-1.0.0/sleep-cassette/")
+    # data_dir = os.path.join(args.dir, "/sleep-edf-database-expanded-1.0.0/sleep-cassette/")
     data_dir = "/scratch/SLEEP_data/physionet-sleep-data/"
     subjects_output_dir = "/scratch/SLEEP_data/numpy_subjects"
     output_dir = "/scratch/SLEEP_data/numpy_saves"
@@ -129,13 +112,15 @@ def main():
         os.makedirs(output_dir)
 
     # Select channel
-    all_picks = ['EEG Fpz-Cz',
-            'EEG Pz-Oz',
-            'EOG horizontal',
-            'Resp oro-nasal',
-            'EMG submental',
-            'Temp rectal',
-            'Event marker']
+    all_picks = [
+        "EEG Fpz-Cz",
+        "EEG Pz-Oz",
+        "EOG horizontal",
+        "Resp oro-nasal",
+        "EMG submental",
+        "Temp rectal",
+        "Event marker",
+    ]
     select_ch = all_picks[: args.channels]
 
     # Read raw and annotation EDF files
@@ -150,40 +135,40 @@ def main():
 
     psg_fnames = np.asarray(psg_fnames)
     ann_fnames = np.asarray(ann_fnames)
-    
+
     for i in range(len(psg_fnames)):
 
         print(i)
 
         raw = read_raw_edf(psg_fnames[i], preload=True, stim_channel=None)
-        sampling_rate = raw.info['sfreq']
+        sampling_rate = raw.info["sfreq"]
         raw_ch_df = raw.to_data_frame()[select_ch]
-           
+
         raw_ch_df.set_index(np.arange(len(raw_ch_df)))
 
         # Get raw header
-        f = open(psg_fnames[i], 'r', errors='ignore')
+        f = open(psg_fnames[i], "r", errors="ignore")
         reader_raw = dhedfreader.BaseEDFReader(f)
         reader_raw.read_header()
         h_raw = reader_raw.header
         f.close()
-        raw_start_dt = datetime.strptime(h_raw['date_time'], "%Y-%m-%d %H:%M:%S")
+        raw_start_dt = datetime.strptime(h_raw["date_time"], "%Y-%m-%d %H:%M:%S")
 
         # Read annotation and its header
-        f = open(ann_fnames[i], 'r', errors='ignore')
+        f = open(ann_fnames[i], "r", errors="ignore")
         reader_ann = dhedfreader.BaseEDFReader(f)
         reader_ann.read_header()
         h_ann = reader_ann.header
         _, _, ann = zip(*reader_ann.records())
         f.close()
-        ann_start_dt = datetime.strptime(h_ann['date_time'], "%Y-%m-%d %H:%M:%S")
+        ann_start_dt = datetime.strptime(h_ann["date_time"], "%Y-%m-%d %H:%M:%S")
 
         # Assert that raw and annotation files start at the same time
         assert raw_start_dt == ann_start_dt
 
         # Generate label and remove indices
-        remove_idx = []    # indicies of the data that will be removed
-        labels = []        # indicies of the data that have labels
+        remove_idx = []  # indicies of the data that will be removed
+        labels = []  # indicies of the data that have labels
         label_idx = []
 
         for a in ann[0]:
@@ -196,11 +181,15 @@ def main():
                 duration_epoch = int(duration_sec / EPOCH_SEC_SIZE)
                 label_epoch = np.ones(duration_epoch, dtype=np.int) * label
                 labels.append(label_epoch)
-                idx = int(onset_sec * sampling_rate) + np.arange(duration_sec * sampling_rate, dtype=np.int)
+                idx = int(onset_sec * sampling_rate) + np.arange(
+                    duration_sec * sampling_rate, dtype=np.int
+                )
                 label_idx.append(idx)
 
             else:
-                idx = int(onset_sec * sampling_rate) + np.arange(duration_sec * sampling_rate, dtype=np.int)
+                idx = int(onset_sec * sampling_rate) + np.arange(
+                    duration_sec * sampling_rate, dtype=np.int
+                )
                 remove_idx.append(idx)
 
         labels = np.hstack(labels)
@@ -220,10 +209,12 @@ def main():
             extra_idx = np.setdiff1d(label_idx, select_idx)
             # Trim the tail
             if np.all(extra_idx > select_idx[-1]):
-               
-                n_label_trims = int(math.ceil(len(extra_idx) / (EPOCH_SEC_SIZE * sampling_rate)))
-                if n_label_trims!=0:
-                   
+
+                n_label_trims = int(
+                    math.ceil(len(extra_idx) / (EPOCH_SEC_SIZE * sampling_rate))
+                )
+                if n_label_trims != 0:
+
                     labels = labels[:-n_label_trims]
 
         # Remove movement and unknown stages if any
@@ -247,10 +238,12 @@ def main():
         start_idx = nw_idx[0] - (w_edge_mins * 2)
         end_idx = nw_idx[-1] + (w_edge_mins * 2)
 
-        if start_idx < 0: start_idx = 0
-        if end_idx >= len(y): end_idx = len(y) - 1
+        if start_idx < 0:
+            start_idx = 0
+        if end_idx >= len(y):
+            end_idx = len(y) - 1
 
-        select_idx = np.arange(start_idx, end_idx+1)
+        select_idx = np.arange(start_idx, end_idx + 1)
         print("Data before selection: {}, {}".format(x.shape, y.shape))
         x = x[select_idx]
         y = y[select_idx]
@@ -259,7 +252,6 @@ def main():
         # Save
         filename = ntpath.basename(psg_fnames[i]).replace("-PSG.edf", ".npz")
 
-      
         save_dict = {
             "x": x,
             "y": y,
@@ -270,14 +262,16 @@ def main():
         }
         np.savez(os.path.join(output_dir, filename), **save_dict)
 
-        print ("\n====================================================================================\n")
+        print(
+            "\n====================================================================================\n"
+        )
 
     combine_to_subjects(output_dir, subjects_output_dir)
 
 
 if __name__ == "__main__":
-    
+
     seed = 1234
     np.random.seed(seed)
-    
+
     main()
