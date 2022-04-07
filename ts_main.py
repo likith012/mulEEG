@@ -2,7 +2,7 @@ import wandb
 import numpy as np
 import torch
 import argparse
-from preprocessing.dataloader import data_generator
+from utils.dataloader import data_generator
 from trainer import sleep_pretrain
 from config import Config
 

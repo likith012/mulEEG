@@ -2,7 +2,7 @@ import torch
 import numpy as np
 import os
 from torch.utils.data import Dataset
-from .augmentations import augment
+from utils.augmentations import augment
 
 
 class Load_Dataset(Dataset):
