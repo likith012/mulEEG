@@ -1,9 +1,8 @@
-#%%
 import torch.nn as nn
 import torch.nn.functional as F
 import torch
 import numpy as np
-#%%
+
 from .resnet1d import BaseNet
 
 # Residual Block
@@ -258,7 +257,7 @@ class contrast_loss(nn.Module):
 
 
         return loss
-#%%
+        
     def intra_loss(self,weak_time,weak_spect,strong_time,strong_spect):
         weak_time = F.normalize(weak_time,p=2,dim=1)
         strong_time = F.normalize(strong_time,p=2,dim=1)
@@ -288,7 +287,6 @@ class contrast_loss(nn.Module):
         loss = -torch.log(pos/neg)
         loss = loss.mean()
         return loss
-#%%
 
     def forward(self,weak,strong,epoch):
         weak_time_feats,weak_fusion_feats,weak_spect_feats,strong_time_feats,strong_fusion_feats,strong_spect_feats= self.model(weak,strong)
@@ -301,7 +299,6 @@ class contrast_loss(nn.Module):
         return tot_loss,l1.item(),l2.item(),l3.item(),intra_loss.item()
 
 
-#%%
 class ft_loss(nn.Module):
 
     def __init__(self,chkpoint_pth,config,device):
