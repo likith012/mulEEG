@@ -47,11 +47,11 @@ positively influence each other is challenging, and the existing methods perform
 
 
 
-> Our approach performs better substantially in a low labelled data regime.
+> Our method performs better substantially in a low labelled data regime.
 
 <img src="/images/semisupervised.png" width="600">
 
-> t-SNE visualization using our approach (no labels used) shows clear clusters and captures the sleep-staging progression observed clinically.
+> t-SNE visualization using our method (no labels used) shows clear clusters and captures the sleep-staging progression observed clinically.
 
 <img src="/images/cluster.png" width="750">
 
