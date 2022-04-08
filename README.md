@@ -100,12 +100,13 @@ positively influence each other is challenging, and the existing methods perform
 ## License and Citation 📰
 The software is licensed under the Apache License 2.0. Please cite the following paper if you have used this code:
 ```
-@INPROCEEDINGS{9658706,  
-author={Reddy, Likith and Talwar, Vivek and Alle, Shanmukh and Bapi, Raju. S. and Priyakumar, U. Deva},  
-booktitle={2021 IEEE International Conference on Systems, Man, and Cybernetics (SMC)},   
-title={IMLE-Net: An Interpretable Multi-level Multi-channel Model for ECG Classification},   
-year={2021},  
-pages={1068-1074}, 
-doi={10.1109/SMC52423.2021.9658706}}
+@misc{kumar2022muleeg,
+    title={mulEEG: A Multi-View Representation Learning on EEG Signals},
+    author={Vamsi Kumar and Likith Reddy and Shivam Kumar Sharma and Kamalakar Dadi and Chiranjeevi Yarra and Bapi S. Raju and Srijithesh Rajendran},
+    year={2022},
+    eprint={2204.03272},
+    archivePrefix={arXiv},
+    primaryClass={cs.LG}
+}
 ```
 
