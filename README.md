@@ -89,7 +89,7 @@ positively influence each other is challenging, and the existing methods perform
 
 ## Getting the weights :weight_lifting:
 
-> Download the weights for several models trained on the PTB-XL dataset.
+> Download the model weights for all the baseline methods and ours.
 
 | Name | Sleep-EDF | SHHS |  
 | ---- | ---------- | ---- |
