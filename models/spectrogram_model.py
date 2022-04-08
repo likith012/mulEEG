@@ -13,6 +13,7 @@ This file can also be imported as a module and contains the following functions:
 import torch.nn as nn
 import torch
 
+
 class ResBlock(nn.Module):
     """
     A Simple ResNet Block with 2 convolutional layers and a skip connection
@@ -37,23 +38,34 @@ class ResBlock(nn.Module):
         
     """
 
-    def __init__(self, in_channels: int, out_channels: int, stride: int = 1, downsample: bool = False, pooling: bool = False) -> None:
+    def __init__(
+        self,
+        in_channels: int,
+        out_channels: int,
+        stride: int = 1,
+        downsample: bool = False,
+        pooling: bool = False,
+    ) -> None:
         super(ResBlock, self).__init__()
 
-        self.conv1 = nn.Conv2d(in_channels, out_channels, kernel_size=3, stride=stride, padding=1)
+        self.conv1 = nn.Conv2d(
+            in_channels, out_channels, kernel_size=3, stride=stride, padding=1
+        )
         self.bn1 = nn.BatchNorm2d(out_channels)
         self.relu = nn.ELU(inplace=True)
         self.conv2 = nn.Conv2d(out_channels, out_channels, kernel_size=3, padding=1)
         self.bn2 = nn.BatchNorm2d(out_channels)
-        self.maxpool = nn.MaxPool2d(2, stride=2) 
+        self.maxpool = nn.MaxPool2d(2, stride=2)
         self.downsample = nn.Sequential(
-           nn.Conv2d(in_channels, out_channels, kernel_size=3, stride=stride, padding=1),
-           nn.BatchNorm2d(out_channels)
+            nn.Conv2d(
+                in_channels, out_channels, kernel_size=3, stride=stride, padding=1
+            ),
+            nn.BatchNorm2d(out_channels),
         )
         self.downsampleOrNot = downsample
         self.pooling = pooling
         self.dropout = nn.Dropout(0.5)
-        
+
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """ Forward pass of the block."""
 
@@ -120,27 +132,35 @@ class CNNEncoder2D_SLEEP(nn.Module):
         signal = []
 
         for s in range(X_train.shape[1]):
-            spectral = torch.stft(X_train[:, s, :],
-                n_fft = 256,
-                hop_length = 256 * 1 // 4,
-                center = False,
-                onesided = True,
-                return_complex=False)
+            spectral = torch.stft(
+                X_train[:, s, :],
+                n_fft=256,
+                hop_length=256 * 1 // 4,
+                center=False,
+                onesided=True,
+                return_complex=False,
+            )
             signal.append(spectral)
-        
-        signal1 = torch.stack(signal)[:, :, :, :, 0].permute(1, 0, 2, 3) 
-        signal2 = torch.stack(signal)[:, :, :, :, 1].permute(1, 0, 2, 3) 
 
-        return torch.cat([torch.log(torch.abs(signal1) + 1e-8), torch.log(torch.abs(signal2) + 1e-8)], dim=1) 
+        signal1 = torch.stack(signal)[:, :, :, :, 0].permute(1, 0, 2, 3)
+        signal2 = torch.stack(signal)[:, :, :, :, 1].permute(1, 0, 2, 3)
+
+        return torch.cat(
+            [
+                torch.log(torch.abs(signal1) + 1e-8),
+                torch.log(torch.abs(signal2) + 1e-8),
+            ],
+            dim=1,
+        )
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """ Forward pass of the block."""
-        
+
         x = self.torch_stft(x)
         x = self.conv1(x)
         x = self.conv2(x)
         x = self.conv3(x)
-        x = self.conv4(x) 
+        x = self.conv4(x)
 
         x = x.reshape(x.shape[0], -1)
 
