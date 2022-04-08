@@ -1,14 +1,13 @@
 import os
 import torch
 import torch.nn as nn
-import matplotlib.pyplot as plt
 import numpy as np
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 from config import Config
 from torchmetrics.functional import accuracy, f1, cohen_kappa
 from models.model import contrast_loss, ft_loss
 from sklearn.metrics import ConfusionMatrixDisplay, balanced_accuracy_score
-from data_preprocessing.dataloader import cross_data_generator
+from utils.dataloader import cross_data_generator
 from sklearn.model_selection import KFold
 
 

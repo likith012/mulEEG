@@ -56,13 +56,13 @@ class BasicBlock_Bottle(nn.Module):
 
 # Main 1D-RESNET Model
 class BaseNet(nn.Module):
-    def __init__(self, input_channel=1, layers=[3, 4, 6, 3], classes=4):
+    def __init__(self, input_channels=1, layers=[3, 4, 6, 3]):
         self.inplanes3 = 16
 
         super(BaseNet, self).__init__()
 
         self.conv1 = nn.Conv1d(
-            input_channel, 16, kernel_size=71, stride=2, padding=35, bias=False
+            input_channels, 16, kernel_size=71, stride=2, padding=35, bias=False
         )
         self.bn1 = nn.BatchNorm1d(16)
         self.relu = nn.ReLU(inplace=True)

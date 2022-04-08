@@ -1,8 +1,8 @@
 """Generates data splits for sleep-edf dataset. 
 
-This file is used as script and contains the following functions:
+    This file is used as script and contains the following functions:
 
-    * main - Generates the pretext, train and test splits on sleep-edf dataset for self-supervised pre-training.
+    * gen_sleepedf - Generates the pretext, train and test splits on sleep-edf dataset for self-supervised pre-training.
 
 """
 
@@ -14,12 +14,19 @@ __email__ = "likith012@gmail.com, vamsi81523@gmail.com"
 import os
 import torch
 import numpy as np
-import argparse
 
 
+def gen_sleepedf(files:np.ndarray,save_path:str):
 
-def main():
-    """Generates the pretext, train and test splits on sleep-edf dataset for self-supervised pre-training."""
+    """
+    Generates the pretext, train and test splits on sleep-edf dataset for self-supervised pre-training.
+
+    Attributes:
+        files: list
+            List of files to be used for generating the splits.
+        save_path: str
+            Path to save the splits.
+    """
 
     ######## Pretext files########
     pretext_files = list(np.random.choice(files,58,replace=False))
@@ -38,7 +45,7 @@ def main():
     data_save["samples"] = torch.from_numpy(X.transpose(0, 2, 1))
     data_save["labels"] = torch.from_numpy(y)
 
-    torch.save(data_save, os.path.join(output_dir, "pretext.pt"))
+    torch.save(data_save, os.path.join(save_path, "pretext.pt"))
 
     ######## Training files ##########
     training_files = list(np.random.choice(sorted(list(set(files) - set(pretext_files))), 10, replace=False))
@@ -58,7 +65,7 @@ def main():
     data_save = dict()
     data_save["samples"] = torch.from_numpy(X.transpose(0, 2, 1))
     data_save["labels"] = torch.from_numpy(y)
-    torch.save(data_save, os.path.join(output_dir, "train.pt"))
+    torch.save(data_save, os.path.join(save_path, "train.pt"))
 
     ######## Test files ##########
     test_files = sorted(list(set(files) - set(pretext_files) - set(training_files)))
@@ -79,22 +86,4 @@ def main():
     data_save["samples"] = torch.from_numpy(X.transpose(0, 2, 1))
     data_save["labels"] = torch.from_numpy(y)
 
-    torch.save(data_save, os.path.join(output_dir, "test.pt"))
-
-if __name__ == "__main__":
-    # Seed for reproducibility
-    seed = 1234
-    np.random.seed(seed)
-
-    current_path = os.getcwd()
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--dir", type=str, default=os.path.join(current_path, 'data'), help="File path to the PSG and annotation files.")
-    args = parser.parse_args()
-
-    data_dir = os.path.join(args.dir, 'numpy_subjects')
-    output_dir = os.path.join(args.dir, 'less_subjs')
-    files = os.listdir(data_dir)
-    files = np.array([os.path.join(data_dir, i) for i in files])
-    files.sort()
-
-    main()
+    torch.save(data_save, os.path.join(save_path, "test.pt"))
