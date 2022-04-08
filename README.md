@@ -9,16 +9,16 @@ This repostiory contains code, results and dataset links for our paper titled **
 
 <sup>[1](#myfootnote1)</sup>Equal contribution
 
->**More details on the paper can be found [here](https://ieeexplore.ieee.org/document/9658706).**
+>**More details on the paper can be found [here](https://arxiv.org/abs/2204.03272).**
 
 ## Table of contents
-- [Introduction](https://github.com/likith012/IMLE-Net/edit/main/README.md#introduction-)
-- [Highlights](https://github.com/likith012/IMLE-Net/edit/main/README.md#features-)
-- [Results](https://github.com/likith012/IMLE-Net/edit/main/README.md#results)
-- [Dataset](https://github.com/likith012/IMLE-Net/edit/main/README.md#organization-office)
-- [Getting started](https://github.com/likith012/IMLE-Net/edit/main/README.md#getting-started-)
-- [Getting the weights](https://github.com/likith012/IMLE-Net/edit/main/README.md#getting-the-weights-weight_lifting)
-- [License and Citation](https://github.com/likith012/IMLE-Net/edit/main/README.md#license-and-citation-)
+- [Introduction](https://github.com/likith012/mulEEG/edit/main/README.md#introduction-)
+- [Highlights](https://github.com/likith012/mulEEG/edit/main/README.md#features-)
+- [Results](https://github.com/likith012/mulEEG/edit/main/README.md#results)
+- [Dataset](https://github.com/likith012/mulEEG/edit/main/README.md#organization-office)
+- [Getting started](https://github.com/likith012/mulEEG/edit/main/README.md#getting-started-)
+- [Getting the weights](https://github.com/likith012/mulEEG/edit/main/README.md#getting-the-weights-weight_lifting)
+- [License and Citation](https://github.com/likith012/mulEEG/edit/main/README.md#license-and-citation-)
 
 ## Introduction 🔥
 
@@ -27,22 +27,23 @@ positively influence each other is challenging, and the existing methods perform
 
 ## Highlights ✨
 
-- A model that learns patterns at the beat, rhythm, and channel level with high accuracy💯.
-- An interpretable model that gives an explainability at the beat, rhythm and  channel level💥.
-- Complete preprocessing pipeline, training and inference codes are available.
-- Training weights are available to try out the model.
+- A self-supervised model pre-trained on unlabelled Electroencephalography (EEG) data beating the supervised counterpart 💥.
+- Complete pre-processing pipeline, augmentation and training scripts are available for experimentation.
+- Pre-trained model weights are provided for reproducability.
 
 ## Results :man_dancing:
 
-> Performance metrics
+> Linear evaluation results on Sleep-EDF dataset pre-trained on large SHHS dataset.
 
-|          | Macro ROC-AUC | Mean Accuracy | Max. F1-score |
+|          | Accuracy | κ | Macro F1-score |
 | -------- | ------------- | ------------- | ------------- |
-| Resnet101 | 0.8952 | 86.78 | 0.7558 |
-| Mousavi et al.| 0.8654 | 84.19 | 0.7315 | 
-| ECGNet | 0.9101 | 87.35 | 0.7712 |
-| Rajpurkar et al. | 0.9155 | 87.91 | 0.7895 |
-| **IMLE-Net**| **0.9216** | **88.85** | **0.8057** |
+| Randomly Initialized | 38.68 | 0.1032 | 16.54 |
+| Single-View | 76.73 | 0.6669 | 66.42 |
+| Simple Fusion| 76.75 | 0.6658 | 65.78 | 
+| CMC | 75.84 |  0.6520 | 64.40 |
+| Supervised | 77.88 | 0.6914 | 68.10 |
+| Ours | 78.18 | 0.6869 | 67.88 |
+| **Ours + diverse loss**| **78.54** | **0.6914** | **68.10** |
 
 
 
