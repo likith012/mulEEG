@@ -15,6 +15,7 @@ import numpy as np
 import pandas as pd
 from scipy.signal import butter,lfilter
 from mne.io import concatenate_raws, read_raw_edf
+from generate_sleepedf import gen_sleepedf
 
 import dhedfreader
 
@@ -105,31 +106,34 @@ def combine_to_subjects(root_dir, output_dir):
 def main():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--dir", type=str, default="/scratch/SLEEP_data",
+    parser.add_argument("--data_dir", type=str, default="./SLEEP_data",
                         help="File path to the PSG and annotation files.")
 
-    parser.add_argument("--channels", type= int, default=2,
-                        help="The selected channel")
+    parser.add_argument("--save_path", type=str, default="./SLEEP_data",
+                        help="Path to save preprocess files")
+
 
     args = parser.parse_args()
 
-    args.dir = "/scratch/SLEEP_data"
-    args.channels = 2
+    channels = 1
 
 
-    #data_dir = os.path.join(args.dir, "/sleep-edf-database-expanded-1.0.0/sleep-cassette/")
-    data_dir = "/scratch/SLEEP_data/physionet-sleep-data/"
-    subjects_output_dir = "/scratch/SLEEP_data/numpy_subjects"
-    output_dir = "/scratch/SLEEP_data/numpy_saves"
+    data_dir = os.path.join(args.data_dir,"/physionet-sleep-data/")
+    subjects_output_dir = os.path.join(args.save_path,"/numpy_subjects/")
+    output_dir = os.path.join(args.save_path,"/numpy_saves/")
+    save_dir = os.path.join(args.save_path,"/data/")
 
     print(data_dir)
 
     # Output dir
+    if not os.path.exists(subjects_output_dir):
+        os.makedirs(subjects_output_dir)
+
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
-    else:
-        shutil.rmtree(output_dir)
-        os.makedirs(output_dir)
+
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
 
     # Select channel
     all_picks = ['EEG Fpz-Cz',
@@ -139,7 +143,7 @@ def main():
             'EMG submental',
             'Temp rectal',
             'Event marker']
-    select_ch = all_picks[: args.channels]
+    select_ch = all_picks[:channels]
 
     # Read raw and annotation EDF files
     psg_fnames = glob.glob(os.path.join(data_dir, "*PSG.edf"))
@@ -277,6 +281,12 @@ def main():
 
     combine_to_subjects(output_dir, subjects_output_dir)
 
+    files = os.listdir(subjects_output_dir)
+    files = np.array([os.path.join(subjects_output_dir, i) for i in files])
+    files.sort()
+
+    # generates the final preprocessed data
+    gen_sleepedf(files, subjects_output_dir)
 
 if __name__ == "__main__":
 
