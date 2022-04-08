@@ -47,13 +47,13 @@ positively influence each other is challenging, and the existing methods perform
 
 
 
-> Visualization of normalized attention scores with red having a higher attention score and yellow having a lower attention score for a 12-lead ECG signal.
+> Our approach performs better substantially in a low labelled data regime.
 
-<img src="/images/viz_nor_final.png" width="800">
+<img src="/images/semisupervised.png" width="800">
 
-> Channel Importance scores for the same 12-lead ECG signal.
+> t-SNE visualization using our approach (no labels used) shows clear clusters and captures the sleep-staging progression observed clinically.
 
-<img src="/images/graph.png" width="400">
+<img src="/images/cluster.png" width="400">
 
 
 ## Getting started 🥷
@@ -64,24 +64,24 @@ positively influence each other is challenging, and the existing methods perform
 
 #### What each file does
 
-- `train.py` trains a particular model from scratch
+<!-- - `train.py` trains a particular model from scratch
 - `preprocessing` contains the preprocessing scripts
 - `models` contains scripts for each model
-- `utils` contains utilities for `dataloader`, `callbacks` and `metrics`
+- `utils` contains utilities for `dataloader`, `callbacks` and `metrics` -->
 
 #### Training the model
-- All the models are implemented in `tensorflow` and `torch`
+<!-- - All the models are implemented in `tensorflow` and `torch`
 - Models implemented in `tensorflow` are `imle_net`, `mousavi` and `rajpurkar`
 - Models implemented in `torch` are `ecgnet` and `resnet101`
 - To log the training and validation metrics on wandb, set `--log_wandb` flag to `True`
 - To train a particular model from scratch, `cd IMLE-Net`
 - To run `tensorflow` models, `python train.py --data_dir data/ptb --model imle_net --batchsize 32 --epochs 60 --loggr True`
-- To run `torch` models, `python torch_train.py --data_dir data/ptb --model ecgnet --batchsize 32 --epochs 60 --loggr True`
+- To run `torch` models, `python torch_train.py --data_dir data/ptb --model ecgnet --batchsize 32 --epochs 60 --loggr True` -->
 
 #### Testing the model
-- To test the model, `cd IMLE-Net`
+<!-- - To test the model, `cd IMLE-Net`
 - To run `tensorflow` models, `python inference.py --data_dir data/ptb --model imle_net --batchsize 32`
-- To run `torch` models, `python torch_inference.py --data_dir data/ptb --model ecgnet --batchsize 32`
+- To run `torch` models, `python torch_inference.py --data_dir data/ptb --model ecgnet --batchsize 32` -->
 
 #### Logs and checkpoints
 - The logs are saved in `logs/` directory.
@@ -91,12 +91,15 @@ positively influence each other is challenging, and the existing methods perform
 
 > Download the weights for several models trained on the PTB-XL dataset.
 
-| Name | Model link |  
-| ---- | ---------- |
-| Mousavi et al.| [link](https://drive.google.com/file/d/13nUC_9mlSdw-I_HfFai4k8k9bgOruQ-x/view?usp=sharing) |
-| ECGNet | [link](https://drive.google.com/file/d/1k0cgZBKQmkeVwu879NAtV-hDfLzCRCYJ/view?usp=sharing) |
-| Rajpurkar et al. | [link](https://drive.google.com/file/d/18GZMDBAE2mHmQy8aXwD6cZoPjIAcavWX/view?usp=sharing) |
-| **IMLE-Net**| [link](https://drive.google.com/file/d/1-ZJSEr_NtbLXWWx5otXT5ItE5p-Wc0HN/view?usp=sharing) |
+| Name | Sleep-EDF | SHHS |  
+| ---- | ---------- | ---- |
+| Randomly Initialized | [link]() | [link]() | 
+| Single-View | [link]() | [link]() | 
+| Simple Fusion| [link]() | [link]() | 
+| CMC | [link]() | [link]() | 
+| Supervised | [link]() | [link]() | 
+| **Ours + diverse loss**| [link]() | [link]() | 
+
 
 ## License and Citation 📰
 The software is licensed under the Apache License 2.0. Please cite the following paper if you have used this code:
