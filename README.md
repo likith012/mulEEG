@@ -93,12 +93,12 @@ positively influence each other is challenging, and the existing methods perform
 
 | Name | Sleep-EDF | SHHS |  
 | ---- | ---------- | ---- |
-| Randomly Initialized | [link]() | [link]() | 
-| Single-View | [link]() | [link]() | 
-| Simple Fusion| [link]() | [link]() | 
-| CMC | [link]() | [link]() | 
-| Supervised | [link]() | [link]() | 
-| **Ours + diverse loss**| [link]() | [link]() | 
+| Single-View | [link](/weights/sleepedf/single_view.pt) | [link](/weights/shhs/single_view.pt) |
+| Simple Fusion| [link](/weights/sleepedf/simple_fusion.pt) | [link](/weights/shhs/simple_fusion.pt) |
+| CMC | [link](/weights/sleepedf/cmc.pt) | [link](/weights/shhs/cmc.pt) |
+| Supervised | [link](/weights/sleepedf/supervised_pretrain.pt) | [link](/weights/shhs/supervised_pretrain.pt) |
+| **Ours + diverse loss**| [link](/weights/sleepedf/ours_diverse.pt) | [link](/weights/shhs/ours_diverse.pt) |
+
 
 
 ## License and Citation 📰
