@@ -41,7 +41,7 @@ positively influence each other is challenging, and the existing methods perform
 | Single-View | 76.73 | 0.6669 | 66.42 |
 | Simple Fusion| 76.75 | 0.6658 | 65.78 | 
 | CMC | 75.84 |  0.6520 | 64.40 |
-| Supervised | 77.88 | 0.6914 | 68.10 |
+| Supervised | 77.88 | 0.6838 | 67.84 |
 | Ours | 78.18 | 0.6869 | 67.88 |
 | **Ours + diverse loss**| **78.54** | **0.6914** | **68.10** |
 
