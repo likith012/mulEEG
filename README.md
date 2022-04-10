@@ -93,11 +93,11 @@ positively influence each other is challenging, and the existing methods perform
 
 | Name | Sleep-EDF | SHHS |  
 | ---- | ---------- | ---- |
-| Single-View | [link](https://github.com/kuwar81523/mulEEG/tree/main/weights/sleepedf/single_view.pt) | [link](https://github.com/kuwar81523/mulEEG/tree/main/weights/shhs/single_view.pt) |
-| Simple Fusion| [link](https://github.com/kuwar81523/mulEEG/tree/main/weights/sleepedf/simple_fusion.pt) | [link](https://github.com/kuwar81523/mulEEG/tree/main/weights/shhs/simple_fusion.pt) |
-| CMC | [link](https://github.com/kuwar81523/mulEEG/tree/main/weights/sleepedf/cmc.pt) | ![link]("https://github.com/kuwar81523/mulEEG/tree/main/weights/shhs/cmc.pt") |
-| Supervised | [link](https://github.com/kuwar81523/mulEEG/tree/main/weights/sleepedf/supervised_pretrain.pt) | [link](https://github.com/kuwar81523/mulEEG/tree/main/weights/shhs/supervised_pretrain.pt) |
-| **Ours + diverse loss**| [link](https://github.com/kuwar81523/mulEEG/tree/main/weights/sleepedf/ours_diverse.pt) | [link](https://github.com/kuwar81523/mulEEG/tree/main/weights/shhs/ours_diverse.pt) |
+| Single-View | [link](/weights/sleepedf/single_view.pt) | [link](/weights/shhs/single_view.pt) |
+| Simple Fusion| [link](/weights/sleepedf/simple_fusion.pt) | [link](/weights/shhs/simple_fusion.pt) |
+| CMC | [link](/weights/sleepedf/cmc.pt) | [link](/weights/shhs/cmc.pt) |
+| Supervised | [link](/weights/sleepedf/supervised_pretrain.pt) | [link](/weights/shhs/supervised_pretrain.pt) |
+| **Ours + diverse loss**| [link](/weights/sleepedf/ours_diverse.pt) | [link](/weights/shhs/ours_diverse.pt) |
 
 
 
