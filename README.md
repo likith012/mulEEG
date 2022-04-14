@@ -5,9 +5,9 @@
 
 # mulEEG: A Multi-View Representation Learning on EEG Signals
 This repostiory contains code, results and dataset links for our paper titled ***mulEEG: A Multi-View Representation Learning on EEG Signals***. 📝
->**Authors:** <a name="myfootnote1"><sup>*</sup></a>Vamsi Kumar, <a name="myfootnote1"><sup>*</sup></a>Likith Reddy, Shivam Kumar Sharma, Kamalakar Dadi, Chiranjeevi Yarra, Bapi Raju and Srijithesh Rajendran
+>**Authors:** <a name="myfootnote1"><sup>1</sup></a>Vamsi Kumar, <a name="myfootnote1"><sup>1</sup></a>Likith Reddy, Shivam Kumar Sharma, Kamalakar Dadi, Chiranjeevi Yarra, Bapi Raju and Srijithesh Rajendran
 
-<sup>[*](#myfootnote1)</sup>Equal contribution
+<sup>[1](#myfootnote1)</sup>Equal contribution
 
 >**More details on the paper can be found [here](https://arxiv.org/abs/2204.03272).**
 
