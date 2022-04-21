@@ -63,25 +63,11 @@ positively influence each other is challenging, and the existing methods perform
 - Alternatively, set up the environment and train the model using the `Dockerfile`. Run `docker build -f Dockerfile -t <image_name> .`
 
 #### What each file does
-
-<!-- - `train.py` trains a particular model from scratch
-- `preprocessing` contains the preprocessing scripts
-- `models` contains scripts for each model
-- `utils` contains utilities for `dataloader`, `callbacks` and `metrics` -->
-
+TODO
 #### Training the model
-<!-- - All the models are implemented in `tensorflow` and `torch`
-- Models implemented in `tensorflow` are `imle_net`, `mousavi` and `rajpurkar`
-- Models implemented in `torch` are `ecgnet` and `resnet101`
-- To log the training and validation metrics on wandb, set `--log_wandb` flag to `True`
-- To train a particular model from scratch, `cd IMLE-Net`
-- To run `tensorflow` models, `python train.py --data_dir data/ptb --model imle_net --batchsize 32 --epochs 60 --loggr True`
-- To run `torch` models, `python torch_train.py --data_dir data/ptb --model ecgnet --batchsize 32 --epochs 60 --loggr True` -->
-
+TODO
 #### Testing the model
-<!-- - To test the model, `cd IMLE-Net`
-- To run `tensorflow` models, `python inference.py --data_dir data/ptb --model imle_net --batchsize 32`
-- To run `torch` models, `python torch_inference.py --data_dir data/ptb --model ecgnet --batchsize 32` -->
+TODO
 
 #### Logs and checkpoints
 - The logs are saved in `logs/` directory.
