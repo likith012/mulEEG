@@ -28,7 +28,7 @@ positively influence each other is challenging, and the existing methods perform
 ## Highlights ✨
 
 - A self-supervised model pre-trained on unlabelled Electroencephalography (EEG) data beating the supervised counterpart 💥.
-- Complete pre-processing pipeline, augmentation and training scripts are available for reproducability.
+- Complete pre-processing pipeline, augmentation and training scripts are available for experimentation.
 - Pre-trained model weights are provided for reproducability.
 
 ## Results :man_dancing:
