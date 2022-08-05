@@ -52,7 +52,7 @@ def add_noise(x: torch.Tensor, degree: float) -> torch.Tensor:
     x_new = np.linspace(0, 1, num=len_x, endpoint=True)
     interpolation = interp1d(x_old, noise_low_frequency, kind="linear")
     noise2 = interpolation(x_new)
-    out_x = x + noise_low_frequency + noise_high_frequency
+    out_x = x + noise2 + noise_high_frequency
     return out_x
 
 
