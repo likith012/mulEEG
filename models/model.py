@@ -27,7 +27,7 @@ class encoder(nn.Module):
     def __init__(self,config:Type[Config]):
         super(encoder,self).__init__()
         self.time_model = BaseNet()
-        self.attention = attention(config)
+        self.attention = attention()
 
         self.spect_model = CNNEncoder2D_SLEEP(256)
         
