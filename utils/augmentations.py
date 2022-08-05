@@ -225,6 +225,6 @@ def augment(
         weak_augment = masking(jitter(x, config), config)
     else:
         weak_augment = multi_masking(jitter(x, config), config)
-    strong_augment = scaling(flip(x, config), config, degree=degree)
+    strong_augment = scaling(flip(x), config, degree=degree)
     return weak_augment, strong_augment
 
