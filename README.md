@@ -11,6 +11,8 @@ This repostiory contains code, results and dataset links for our MICCAI-2022 pap
 
 >**More details on the paper can be found [here](https://arxiv.org/abs/2204.03272).**
 
+> **Raise an issue for any query regarding the code, paper or for any support.**
+
 ## Table of contents
 - [Introduction](https://github.com/likith012/mulEEG/edit/main/README.md#introduction-)
 - [Highlights](https://github.com/likith012/mulEEG/edit/main/README.md#features-)
