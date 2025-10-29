@@ -64,13 +64,6 @@ positively influence each other is challenging, and the existing methods perform
 - Install all the necessary dependencies using `requirements.txt` file. Run `pip install -r requirements.txt` in terminal
 - Alternatively, set up the environment and train the model using the `Dockerfile`. Run `docker build -f Dockerfile -t <image_name> .`
 
-#### What each file does
-TODO
-#### Training the model
-TODO
-#### Testing the model
-TODO
-
 #### Logs and checkpoints
 - The logs are saved in `logs/` directory.
 - The model checkpoints are saved in `checkpoints/` directory.
@@ -101,4 +94,5 @@ The software is licensed under the Apache License 2.0. Please cite the following
     primaryClass={cs.LG}
 }
 ```
+
 
